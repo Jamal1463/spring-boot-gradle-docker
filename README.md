@@ -95,11 +95,11 @@ $ java -jar build/libs/spring-boot-gradle-docker.jar
 ### Dockerfile
 
 ```docker
-FROM frolvlad/alpine-oraclejdk8:slim
+FROM java
 
 VOLUME /tmp
 
-ADD spring-boot-gradle-docker.jar spring-boot-app.jar
+ADD spring-boot-gradle-docker-0.1.0.jar spring-boot-app.jar
 
 RUN bash -c 'touch /spring-boot-app.jar'
 
@@ -120,7 +120,7 @@ buildscript {
     }
 }
 
-group = 'springio'
+group = 'alexandregama'
 
 apply plugin: 'docker'
 apply plugin: 'java'
@@ -146,9 +146,9 @@ dependencies {
 }
 
 task buildDocker(type: Docker, dependsOn: build) {
-  push = false
+  push = true
   applicationName = jar.baseName
-  dockerfile = file('src/main/docker/Dockerfile')
+  dockerfile = file('docker/Dockerfile')
   doFirst {
     copy {
       from jar
@@ -162,6 +162,9 @@ task wrapper(type: Wrapper) {
 }
 ```
 
+Note that we are using the **push** variable with a true value. This means that we will **push** the image that has created by the build gradle.
+
+But where that image will be pushed? Note the another variable named **group**. This indicates the name of our remote docker repository, in my case named as **alexandregama** (https://hub.docker.com/u/alexandregama/). You just need to replace with your own account.
 
 
 
