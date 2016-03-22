@@ -166,6 +166,26 @@ Note that we are using the **push** variable with a true value. This means that 
 
 But where that image will be pushed? Note the another variable named **group**. This indicates the name of our remote docker repository, in my case named as **alexandregama** (https://hub.docker.com/u/alexandregama/). You just need to replace with your own account.
 
+### Using our new Docker Image
+
+After the **gradle buildDocker** command, we pushed our new image to Docker Hub. Now we are able to use it.
+
+Next, we will run a new container using the new Docker Image:
+
+```bash
+$ docker run -it -p 8888:8080 alexandregama/spring-boot-gradle-docker /bin/bash
+```
+
+Note in the previous command that we are using a port **8888** to access the application.
+
+Note also that we are running our new container and executing the command **/bin/bash** inside the container. It will be useful to see what is happen in the container log. 
+
+Now we might access the application from browser! Just type:
+
+```bash
+$ http://192.168.99.100:8888/hello-docker
+```
+
 
 
 
