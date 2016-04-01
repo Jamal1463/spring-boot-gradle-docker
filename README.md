@@ -160,6 +160,7 @@ task buildDocker(type: Docker, dependsOn: build) {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
+
 ```
 
 Note that we are using the **push** variable with a true value. This means that we will **push** the image that has created by the build gradle.
@@ -185,6 +186,8 @@ Now we might access the application from browser! Just type:
 ```bash
 $ http://192.168.99.100:8888/hello-docker
 ```
+
+
 
 
 
